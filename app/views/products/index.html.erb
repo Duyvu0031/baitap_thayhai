@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SAN PHAM</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+<h1><%= t ".title" %></h1>
+  <div class="container my-5">
+    <!-- Header -->
+  
+    <h1 class="text-center mb-4">Products</h1>
+
+    <!-- Product Table -->
+    <div class="card shadow-sm p-4 mb-5">
+      <h2 class="mb-3">Danh Sach San Pham</h2>
+      <table class="table table-bordered table-striped table-hover">
+        <thead class="table-primary">
+          <tr>
+            <th>id</th>
+            <th>ten san pham</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @products.each_with_index do |product, index| %>
+            <tr>
+              <td><%= index + 1 %></td>
+              <td><%= product.name %></td>
+              <td>
+                <%= link_to "Xem", product, class: "btn btn-sm btn-info" %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Product Form -->
+    <div class="card p-4 shadow-sm">
+      <h2 class="mb-3">them 1 san pham moi</h2>
+      <form action="/products" accept-charset="UTF-8" method="post">
+        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" autocomplete="off">
+
+      
+        <div class="text-end">
+        <input type="submit" name="commit" value="đăng nhập" class="btn btn-primary">
+      
+      <!-- Liên kết 'New product' -->
+      
+      <%= link_to "New product", new_product_path, class: "btn btn-secondary ms-2" if authenticated? %>
+
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
